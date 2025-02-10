@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useFetchProductQuery } from '../Hooks/React Query/useReactQuery'
 import { useDispatch } from 'react-redux';
@@ -26,16 +26,15 @@ const ShopList = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (data) {
-            setSorteddata(data);
-        }
-    }, [data]);
+    // useEffect(() => {
+    //     if (data) {
+    //         setSorteddata(data);
+    //     }
+    // }, [data]);
 
-    const filterProducts = () => {
+    const filterProducts = useMemo(() => {
         if (selectedPrices['price-all']) {
-            setSorteddata(data);
-            return;
+            return data || [];
         }
 
         let filtered = [];
@@ -55,12 +54,16 @@ const ShopList = () => {
             filtered = filtered.concat(data.filter((item) => item.price > 700 && item.price <= 1000));
         }
 
-        setSorteddata(filtered);
-    };
+        return filtered;
+    },[data, selectedPrices, selectcategory])
 
-    useEffect(() => {
-        filterProducts();
-    }, [data, selectedPrices, selectcategory]);
+    useEffect(()=>{
+        setSorteddata(filterProducts);
+    },[filterProducts])
+
+    // useEffect(() => {
+    //     filterProducts();
+    // }, [data, selectedPrices, selectcategory]);
     
     // const handleSortPrice = (order)=>{
     //     const sorted = [...data].sort((a,b)=>order === 'low'? a.price - b.price : b.price - a.price);
