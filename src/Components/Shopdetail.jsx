@@ -1,15 +1,15 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useGetSingleProductQuery } from '../Hooks/React Query/useReactQuery'
+import Loader from '../UI/Loader';
 
 const Shopdetail = () => {
 
     const {id} = useParams();    
     const {data, isLoading} = useGetSingleProductQuery(id);
-    console.log(data);
 
     if(isLoading){
-        return <h1>Loading...</h1>
+        return <h1><Loader/></h1>
     }
     
   return (

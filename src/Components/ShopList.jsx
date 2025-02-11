@@ -4,6 +4,7 @@ import { useFetchProductQuery } from '../Hooks/React Query/useReactQuery'
 import { useDispatch } from 'react-redux';
 import { addtocart } from '../Redux toolkit/Slice/cartSlice';
 import { Pagination } from '@mui/material';
+import Loader from '../UI/Loader';
 
 const ShopList = () => {
 
@@ -85,11 +86,11 @@ const ShopList = () => {
     };
 
     if(isLoading){
-        return <h1>Loading...</h1>
+        return <h1><Loader/></h1>
     }
 
     if(isFetching){
-        return <h1>Fetching...</h1>
+        return <h1><Loader/></h1>
     }
 
     const handledetails = (id)=>{

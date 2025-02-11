@@ -1,8 +1,9 @@
-import { Avatar, Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, Button, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../Redux toolkit/Slice/authSlice';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 
 const Header = () => {
 
@@ -79,12 +80,12 @@ const Header = () => {
             </div>
             <div className="col-lg-3 col-6 text-right">
             <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            {/* <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
-            </Tooltip>
-            <Menu
+            </Tooltip> */}
+            {/* <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
@@ -105,7 +106,17 @@ const Header = () => {
                   <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
                 </MenuItem>
               ))}
-            </Menu>
+            </Menu> */}
+            <Box sx={{ ml: 30, display: 'flex', alignItems: 'center' }}>
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <Button color="inherit" variant='outlined'>Sign In</Button>
+                </SignInButton>
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+          </Box>
           </Box>
             </div>
         </div>
