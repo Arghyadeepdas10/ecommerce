@@ -106,7 +106,7 @@ const ShopList = () => {
         setPage(value);
     }
 
-    const paginatedData = filteredData.slice((page - 1) * 5, page * 5);
+    const paginatedData = filteredData.slice((page - 1) * 6, page * 6);
 
   return (
     <>
@@ -218,9 +218,9 @@ const ShopList = () => {
                             
                 </div>
                 <div className="d-flex justify-content-center align-items-center" >
-                    {filteredData.length > 5 && (
+                    {filteredData.length > 6 && (
                         <Pagination
-                            count={Math.ceil(filteredData.length / 5)}
+                            count={Math.ceil(filteredData.length / 6)}
                             page={page}
                             onChange={handlepagechange}
                             color="secondary"
